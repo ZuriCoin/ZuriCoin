@@ -5,7 +5,7 @@ def SHA256(text):
     return sha256(text.encode('ascii')).hexdigest()
 
 #this should be built like an API . where the values of the varables would be gotten via a POST request
-class block:
+class Block:
     #this 
     def __init__ (self, count, transaction_, previous_hash, time_, date_, nonce):
         self.count = count
@@ -40,4 +40,4 @@ if __name__ =='__main__':
 
     print(start)
     print(start_date)
-    block(count, transactions, previous_hash, start, start_date, nonce)
+    Block(count, transactions, previous_hash, start, start_date, nonce)
