@@ -15,7 +15,11 @@ from Crypto import Signature
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5
+from hashlib import sha256
+from datetime import datetime
 
+def SHA256(text):
+    return sha256(text.encode('ascii')).hexdigest()
 
 class Wallet:
     """Creates, loads and holds private and public keys. Manages transaction
@@ -45,31 +49,61 @@ class Wallet:
         except (IOError, IndexError):
             print('Loading wallet failed...')
             return False
+    
+    def print_keys(self):
+        txt = open("wallet.txt", "r+", encoding='utf-8-sig')
+        for i, lines in enumerate(txt):
+            line = lines.strip("\n")
+            print(line)
 
     def save_keys(self):
 
         if self.public_key and self.private_key:
             access_token = uuid4()
-            url = "https://a1in1.com/Waziri_Coin/waziri_d_enter_walletor.php" \
+            """ url = "https://a1in1.com/Waziri_Coin/waziri_d_enter_walletor.php" \
                 + "?pub={}&private={}&access={}".format(
                         self.public_key,
                         self.private_key,
                         access_token
-                    )
-            # import pdb
-            # pdb.set_trace()
+                    ) """
+            url = "http://localhost/Waziri_Coin/waziri_d_enter_walletor.php" \
+                + "?pub={}&private={}&access={}".format(
+                        self.public_key,
+                        SHA256(self.private_key),
+                        access_token
+                )
+            
             response = requests.get(url)
+            #print(response.json())
+            # and response.json()["status"] == "true"
             if response.status_code == 200:
-                print('Saving wallet successful :)')
+                print('Saving wallet successful ')
             else:
                 print('Saving wallet failed...')
-            try:
+            today = str(datetime.today().isoformat())
+            with open('wallet.txt',  mode='a') as f:
+                f.write(today + "\n")
+                f.write("Public Key: " + self.public_key + "\n")
+                f.write("Private Key: " + self.private_key + "\n")
+                print("Saving wallet Locally was Successful \n")
+            """ try:
+                today = str(date.today())
+                with open('wallet.txt',  mode='a') as f:
+                    f.write(today)
+                    f.write("\n")
+                    f.write("Public Key: " + self.public_key)
+                    f.write('\n')
+                    f.write("Private Key: " + self.private_key)
+                    f.write('\n')
+                    print("Saving wallet Locally was Successful \n")
+            except:
                 with open('wallet.txt',  mode='w') as f:
                     f.write("Public Key: " + self.public_key)
                     f.write('\n')
                     f.write("Private Key: " + self.private_key)
-            except (IOError, IndexError):
-                print('Saving wallet failed...')
+                    print("Saving wallet Locally was Successful \n")
+            else:
+                print('Saving wallet Locally failed...') """
 
     def generate_keys(self):
         """Generate a new pair of private and public key."""
@@ -114,8 +148,8 @@ class Wallet:
     #     return verifier.verify(h, binascii.unhexlify(transaction.signature))
 
 
-if __name__ == '__main__':
+""" if __name__ == '__main__':
     wallet = Wallet()
     wallet.create_keys()
     wallet.save_keys()
-    wallet.load_keys()
+    #wallet.load_keys() """
