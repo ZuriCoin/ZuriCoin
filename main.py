@@ -32,7 +32,7 @@ def mine_side():
             """ print(str(nonce) + "->" + i.get("sender_address") + "->" + i.get("receiver_address") + "->" + str(float(i.get("amount"))) + "->" + previous_hash )
             downtown = SHA256(str(nonce) + "->" + i.get("sender_address") + "->" + i.get("receiver_address") + "->" + str(float(i.get("amount"))) + "->" + previous_hash)
             print(downtown)  """
-            ch = requests.get("http://localhost/Waziri_Coin/mining_leges.php?\
+            ch = requests.get("https://a1in1.com/Waziri_Coin/mining_leges.php?\
                 miner_address={}&\
                 block_count={}&\
                 nonce={}&\
@@ -50,7 +50,8 @@ print("2 to send ZuriCoin")
 print("3 to Receive a List of all your Possible wallet Addresses")
 print("4 to see all/retrive all your Public Keys")
 print("5 to mine Zuri Coin")
-print("6 to Exit")
+print("6 to File Zuri Coin")
+print("7 to Exit")
 print("To back-up your wallets, you would need to save wallet.txt in the cloud or on an external disk drive.\n You can also write your keys on paper and store somewhere save.")
 
 

@@ -14,39 +14,45 @@ import requests
 def SHA256(text):
     return sha256(text.encode('ascii')).hexdigest()
 
-class Transactions:
+class FileCoins:
     def __init__(self):
         self.private_key = SHA256(input("Enter your private key: "))
         self.amount = float(input("Enter the Amount: "))
-        self.receivers_address = input("Enter Receivers Wallet Address: ")
+        #self.receivers_address = input("Enter Receivers Wallet Address: ")
         self.senders_address = input("Enter your own Wallet Address: ")
         self.previous_hash = self.get_the_previous_keys()
         print("Previous Transaction: {}".format(self.previous_hash))
         self.nonce = random.randint(100, 200)
-        print(str(self.nonce) + "->" + self.senders_address + "->" + self.receivers_address + "->" + str(self.amount) + "->" + str(self.previous_hash))
-        self.transaction_de_detols = SHA256(str(self.nonce) + "->" + self.senders_address + "->" + self.receivers_address +  "->" + str(self.amount) + "->" + str(self.previous_hash))
-        self._arrange_trans()
+        print(str(self.nonce) + "->" + self.senders_address + "->" + str(self.amount) + "->" + str(self.previous_hash))
+        self.transaction_de_detols = SHA256(str(self.nonce) + "->" + self.senders_address + "->" + str(self.amount) + "->" + str(self.previous_hash))
+        self._arrange_files()
         #self.get_the_previous_keys()
 
-    def _arrange_trans(self):
-        if not(self.transaction_de_detols == ""): 
+    def _arrange_files(self):
+        if not(self.transaction_de_detols == ""):
             print("\n transaction looks ok, sending trans... \n ")
-            self.add_this_trans()
+            self.add_this_trans_file()
 
-    def add_this_trans(self):
+    def add_this_trans_file(self):
         print(self.private_key)
         print(self.transaction_de_detols)
         print(self.nonce)
-        x = requests.get("https://a1in1.com/Waziri_Coin/_transrecorder.php?\
+        x = requests.get("https://a1in1.com/Waziri_Coin/file_a_coin.php?\
             private_key={}&\
             sender_address={}&\
-            receiver_address={}&\
             previous_hash={}&\
             transaction={}&\
-            amount={}".format(self.private_key, self.senders_address, self.receivers_address, self.previous_hash, self.transaction_de_detols, self.amount )
+            amount={}".format(self.private_key, self.senders_address, self.previous_hash, self.transaction_de_detols, self.amount )
         )
-        x = x.text
-        print(x)
+        """ x = x.json()
+        if (x["status"] == "true" ):
+            if (x["collector_value"] is not ""):
+                retrive_key = x["collector_value"]
+                the_file = open(self.transaction_de_detols, 'w')
+                the_file.write(str(retrive_key + "\n"))
+                the_file.write(str(self.transaction_de_detols + "\n"))
+                the_file.write(str(self.amount + " ZuriCoin" +"\n")) """
+        print(x.text)
 
         #this is where we would send the transaction to the ledger....
         #we would be sending 7 things to the trasaction DB...
@@ -77,4 +83,4 @@ class Transactions:
         return the_previous
 
 
-#Transactions()
+FileCoins()

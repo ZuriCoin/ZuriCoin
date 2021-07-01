@@ -66,7 +66,7 @@ class Wallet:
                         self.private_key,
                         access_token
                     ) """
-            url = "http://localhost/Waziri_Coin/waziri_d_enter_walletor.php" \
+            url = "https://a1in1.com/Waziri_Coin/waziri_d_enter_walletor.php" \
                 + "?pub={}&private={}&access={}".format(
                         self.public_key,
                         SHA256(self.private_key),
@@ -74,18 +74,21 @@ class Wallet:
                 )
             
             response = requests.get(url)
-            #print(response.json())
-            # and response.json()["status"] == "true"
-            if response.status_code == 200:
+            #print(response.json)
+            # and data["status"] == "true"
+            data = response.text
+            print(data)
+            if response.status_code == 200 :
                 print('Saving wallet successful ')
+                today = str(datetime.today().isoformat())
+                with open('wallet.txt',  mode='a') as f:
+                    f.write(today + "\n")
+                    f.write("Public Key: " + self.public_key + "\n")
+                    f.write("Private Key: " + self.private_key + "\n")
+                    print("Saving wallet Locally was Successful \n")
             else:
                 print('Saving wallet failed...')
-            today = str(datetime.today().isoformat())
-            with open('wallet.txt',  mode='a') as f:
-                f.write(today + "\n")
-                f.write("Public Key: " + self.public_key + "\n")
-                f.write("Private Key: " + self.private_key + "\n")
-                print("Saving wallet Locally was Successful \n")
+            
             """ try:
                 today = str(date.today())
                 with open('wallet.txt',  mode='a') as f:
