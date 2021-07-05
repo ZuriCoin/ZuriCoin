@@ -103,7 +103,7 @@ ENV/
 *.sqlite3
 media/
 staticfiles/
-static
+# static
 *.pyc
 *.db
 *.pid
