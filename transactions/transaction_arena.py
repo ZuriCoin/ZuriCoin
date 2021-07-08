@@ -37,7 +37,7 @@ class Transactions:
         print(self.private_key)
         print(self.transaction_de_detols)
         print(self.nonce)
-        x = requests.get("https://a1in1.com/Waziri_Coin/_transrecorder.php?\
+        x = requests.get("http://localhost/Zuri Coin/Waziri_Coin/_transrecorder.php?\
             private_key={}&\
             sender_address={}&\
             receiver_address={}&\
@@ -45,15 +45,18 @@ class Transactions:
             transaction={}&\
             amount={}".format(self.private_key, self.senders_address, self.receivers_address, self.previous_hash, self.transaction_de_detols, self.amount )
         )
-        x = x.text
-        print(x)
+        print(x.text)
+        outor = dict(x.json())
+        if(outor.get("status") == "true"):
+            print("Transaction initiation was Complete.")
+        
 
         #this is where we would send the transaction to the ledger....
         #we would be sending 7 things to the trasaction DB...
         # private_key, transaction_de_detols, amount, receivers_address, senders_address, nonce
 
     def get_the_previous_keys(self):
-        x = requests.get("https://a1in1.com/Waziri_Coin/get_previous_hash.php?echo=true")
+        x = requests.get("http://localhost/Zuri Coin/Waziri_Coin/get_previous_hash.php?echo=true")
         x = x.json()
         the_previous = ""
         try:
@@ -68,7 +71,7 @@ class Transactions:
 
         #print(the_previous)
         """ 
-        url = "https://a1in1.com/Waziri_Coin/get_previous_hash.php"
+        url = "http://localhost/Zuri Coin/Waziri_Coin/get_previous_hash.php"
         thobj = {"somekey": "somevalue"}
         x = requests.post(url, data = thobj)
         x = requests.post(url = url)

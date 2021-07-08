@@ -17,6 +17,7 @@ class Block:
     def _hash_area(self):
         #self = str(self.nonce) + "->" + self.senders_address + "->" + self.receivers_address + "->" + str(self.amount) + "->" + str(self.previous_hash))
         text = str(self.nonce) + "->" + self.senders_address + "->" + self.receivers_address + "->" + str(float(self.amount)) + "->" + str(self.previous_hash)
+        print(text)
         self.transaction_de_detols = SHA256(text)
         #print(new_hash)
         return self.transaction_de_detols
