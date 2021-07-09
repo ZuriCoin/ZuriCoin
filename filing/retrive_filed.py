@@ -20,7 +20,7 @@ class turnfile2Zuri:
 
     def getotherTransDetails(self):
         out = ""
-        coinDet = requests.get("http://localhost/Zuri Coin/Waziri_Coin/get_file_trans.php?\
+        coinDet = requests.get("https://a1in1.com/Zuri Coin/Waziri_Coin/get_file_trans.php?\
             old_transaction={}&\
             amount={}&\
             echo={}".format(self.transaction, self.amt, "true")
@@ -51,7 +51,7 @@ class turnfile2Zuri:
 
     def itHappens(self):
         #this is where the filed coin would be changed to a pending transaction
-        x_data = requests.get("http://localhost/Zuri Coin/Waziri_Coin/_transrecorder_file.php?\
+        x_data = requests.get("https://a1in1.com/Zuri Coin/Waziri_Coin/_transrecorder_file.php?\
             ra={}&\
             transaction={}&\
             old_transaction={}&\
@@ -64,4 +64,4 @@ class turnfile2Zuri:
             if (bringer.get("status") is "true"):
                 print("Initialized the Retrieve process of the filed coin.")
 
-turnfile2Zuri()
+#turnfile2Zuri()

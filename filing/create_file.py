@@ -37,7 +37,7 @@ class FileCoins:
         print(self.private_key)
         print(self.transaction_de_detols)
         print(self.nonce)
-        x = requests.get("http://localhost/Zuri Coin/Waziri_Coin/file_a_coin.php?\
+        x = requests.get("https://a1in1.com/Zuri Coin/Waziri_Coin/file_a_coin.php?\
             private_key={}&\
             sender_address={}&\
             previous_hash={}&\
@@ -63,7 +63,7 @@ class FileCoins:
         # private_key, transaction_de_detols, amount, receivers_address, senders_address, nonce
 
     def get_the_previous_keys(self):
-        x = requests.get("http://localhost/Zuri Coin/Waziri_Coin/get_previous_hash.php?echo=true")
+        x = requests.get("https://a1in1.com/Zuri Coin/Waziri_Coin/get_previous_hash.php?echo=true")
         x = x.json()
         the_previous = ""
         try:

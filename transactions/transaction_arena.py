@@ -37,7 +37,7 @@ class Transactions:
         print(self.private_key)
         print(self.transaction_de_detols)
         print(self.nonce)
-        x = requests.get("http://localhost/Zuri Coin/Waziri_Coin/_transrecorder.php?\
+        x = requests.get("https://a1in1.com/Zuri Coin/Waziri_Coin/_transrecorder.php?\
             private_key={}&\
             sender_address={}&\
             receiver_address={}&\
@@ -56,7 +56,7 @@ class Transactions:
         # private_key, transaction_de_detols, amount, receivers_address, senders_address, nonce
 
     def get_the_previous_keys(self):
-        x = requests.get("http://localhost/Zuri Coin/Waziri_Coin/get_previous_hash.php?echo=true")
+        x = requests.get("https://a1in1.com/Zuri Coin/Waziri_Coin/get_previous_hash.php?echo=true")
         x = x.json()
         the_previous = ""
         try:
@@ -71,7 +71,7 @@ class Transactions:
 
         #print(the_previous)
         """ 
-        url = "http://localhost/Zuri Coin/Waziri_Coin/get_previous_hash.php"
+        url = "https://a1in1.com/Zuri Coin/Waziri_Coin/get_previous_hash.php"
         thobj = {"somekey": "somevalue"}
         x = requests.post(url, data = thobj)
         x = requests.post(url = url)

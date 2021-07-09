@@ -32,7 +32,7 @@ def mine_side():
             """ print(str(nonce) + "->" + i.get("sender_address") + "->" + i.get("receiver_address") + "->" + str(float(i.get("amount"))) + "->" + previous_hash )
             downtown = SHA256(str(nonce) + "->" + i.get("sender_address") + "->" + i.get("receiver_address") + "->" + str(float(i.get("amount"))) + "->" + previous_hash)
             print(downtown)  """
-            ch = requests.get("http://localhost/Zuri Coin/Waziri_Coin/mining_leges.php?\
+            ch = requests.get("https://a1in1.com/Zuri Coin/Waziri_Coin/mining_leges.php?\
                 miner_address={}&\
                 block_count={}&\
                 nonce={}&\
@@ -61,7 +61,7 @@ exit = 1
 while(exit):
     #print(BLAKE2B_("Hello Dear"))
     #print(SHA256("Hello Dear"))
-    x = input("Please Enter a Number from 1-6 as Described Above\n")
+    x = input("Please Enter a Number from 1-9 as Described Above\n")
     if( x.isdigit() == True ):
         x = int(x)
         if (x == 1):

@@ -61,13 +61,13 @@ class Wallet:
 
         if self.public_key and self.private_key:
             self.access_token = uuid4()
-            """ url = "http://localhost/Zuri Coin/Waziri_Coin/waziri_d_enter_walletor.php" \
+            """ url = "https://a1in1.com/Zuri Coin/Waziri_Coin/waziri_d_enter_walletor.php" \
                 + "?pub={}&private={}&access={}".format(
                         self.public_key,
                         self.private_key,
                         access_token
                     ) """
-            url = "http://localhost/Zuri Coin/Waziri_Coin/waziri_d_enter_walletor.php" \
+            url = "https://a1in1.com/Zuri Coin/Waziri_Coin/waziri_d_enter_walletor.php" \
                 + "?pub={}&private={}&access={}".format(
                         self.public_key,
                         SHA256(self.private_key),
