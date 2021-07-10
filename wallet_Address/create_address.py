@@ -50,8 +50,8 @@ class Address_Creator:
             picked = picked * 10
             picked = picked + random.randint(0, 9)
         if (picked is not 0 and self.pub is not "" and self.acc is not ""):
-            print(SHA512(self.pub))
-            print(reducer(SHA512(self.pub)))
+            #print(SHA512(self.pub))
+            #print(reducer(SHA512(self.pub)))
             return str("Zuri{}{}{}".format(str(picked), BLAKE2B_token(self.acc), reducer(SHA512(self.pub)) ))
         else:
             return "Error: Unable to create the Wallet Address. Null, 0 or None Values be avoided"
