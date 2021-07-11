@@ -28,6 +28,7 @@ class Wallet:
     def __init__(self):
         self.private_key = None
         self.public_key = None
+        self.access_token = None
 
     def create_keys(self):
         """Create a new pair of private and public keys."""
@@ -59,32 +60,35 @@ class Wallet:
     def save_keys(self):
 
         if self.public_key and self.private_key:
-            access_token = uuid4()
-            """ url = "https://a1in1.com/Waziri_Coin/waziri_d_enter_walletor.php" \
+            self.access_token = uuid4()
+            """ url = "https://a1in1.com/Zuri Coin/Waziri_Coin/waziri_d_enter_walletor.php" \
                 + "?pub={}&private={}&access={}".format(
                         self.public_key,
                         self.private_key,
                         access_token
                     ) """
-            url = "https://a1in1.com/Waziri_Coin/waziri_d_enter_walletor.php" \
+            url = "https://a1in1.com/Zuri Coin/Waziri_Coin/waziri_d_enter_walletor.php" \
                 + "?pub={}&private={}&access={}".format(
                         self.public_key,
                         SHA256(self.private_key),
-                        access_token
+                        str(self.access_token)
                 )
             
             response = requests.get(url)
-            #print(response.json)
-            # and data["status"] == "true"
-            data = response.text
-            print(data)
-            if response.status_code == 200 :
+            print(self.public_key)
+            print(SHA256(self.private_key))
+            print(self.access_token)
+            print(response.text)
+            data = response.json()
+            
+            if response.status_code == 200 and data["status"] == "true":
                 print('Saving wallet successful ')
                 today = str(datetime.today().isoformat())
                 with open('wallet.txt',  mode='a') as f:
-                    f.write(today + "\n")
-                    f.write("Public Key: " + self.public_key + "\n")
-                    f.write("Private Key: " + self.private_key + "\n")
+                    f.write(str(today + "\n" + "Public Key: " + self.public_key + "\n"+ \
+                        "Private Key: " + self.private_key + "\n" + \
+                        "Access Token: " + str(self.access_token) + "\n" 
+                    ))
                     print("Saving wallet Locally was Successful \n")
             else:
                 print('Saving wallet failed...')
