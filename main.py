@@ -6,6 +6,7 @@ from mining.zuri_mine import Minable
 from wallet_Address.create_address import Address_Creator
 from filing.create_file import FileCoins
 from filing.retrive_filed import turnfile2Zuri
+from coin_balance.check_wal_bal import wallet_balance
 import requests
 import hashlib
 #import "wallets/wallet.py"
@@ -16,12 +17,12 @@ def SHA256(text):
 def mine_side():
     minable_blocks = Minable()
     pending = minable_blocks.get_all()
-    print("To mine you need to have a Zuri Wallet Address. You also need upto 100 Zuri coins in your Wallet.\
+    print("To mine you need to have a Zuri Wallet Address. You also need upto a minimum amount of Zuri coins in your Wallet. \n \
          This is to help the community understand that you have invested your financial resource on this project. Before tryiing to Mine.")
     reward_address = input("Where should the reward for mining Zuri be sent to? \n")
     for i in pending:
         print(i)
-        for nonce in range(200):
+        for nonce in range(100, 201):
             past_hash = i.get("previous_hash")
             previous_hash = ""
             if past_hash is not "#WAZIRI#":
@@ -51,7 +52,7 @@ menu = "1 to create your Zuri Wallet \n2 to send ZuriCoin \n" + \
 "3 to Receive a List of all your Possible wallet Addresses \n" + \
 "4 to mine Zuri Coin \n5 to File Zuri Coin \n6 to Retrieve Zuri coin \n" + \
 "7 to Get instructions  \n" + \
-"8 Repeat Menu \n9 Exit \n"
+"8 Repeat Menu \n9 Check Wallet Balance \n10 Exit \n"
 "To back-up your wallets, you would need to save wallet.txt in the cloud or on an external disk drive.\n You can also write your keys on paper and store somewhere save. \n" + \
 "You can clone ZuriCoin from Github and use the entire software to create and store your coins. It is easy and simple. You only need Python installed"
 print(menu)
@@ -82,7 +83,7 @@ while(exit):
             
             if (pub_key_dat is not None and access_tok is not None ):
                 print("one of your 999,999 Wallet Address is: ")
-                address = Address_Creator(pub_key_dat, access_tok).rand()
+                address = Address_Creator(access_tok, pub_key_dat).rand()
                 print(address)
 
             #wallet = Wallet()
@@ -103,16 +104,17 @@ while(exit):
         elif(x == 8):
             print(menu)
         elif(x == 9):
+            wallet_addr = input("Please Enter your Wallet Address: ")
+            wallet_balance(wallet_addr)
+        elif(x == 10):
             exit = 0
             
     else:
         print("Only integers are allowed.")
 
-#Zuri41587707f29839a2d38cf79361d75cf13713344f9b074f7dd40f8421e4
-#Zuri1767707f29839a2d38cf79361d75cf13713344f9b074f7dd40f8421e4
-#Zuri58533707f29839a2d38cf79361d75cf13713344f9b074f7dd40f8421e4
-#Zuri45601107f29839a2d38cf79361d75cf13713344f9b074f7dd40f8421e4
-#Zuri93942407f29839a2d38cf79361d75cf13713344f9b074f7dd40f8421e4
+#Zuri327592fdc525166aee28cd6bad2af5702a6c6002d792cbc3f47bbea041
+#Zuri586680fdc525166aee28cd6bad2af5702a6c6002d792cbc3f47bbea041
+#Zuri797879fdc525166aee28cd6bad2af5702a6c6002d792cbc3f47bbea041
 
 #vD9hL1mC7aL8oO0sF4dP3yI1iV5kC3gA4rV1tV8lC1eB0nE034
 #$2y$10$elxCwHrsgEQrToJy5IBIT.hfxhvdDBcZy9QC\/ElOn6vJY9u8pP1vC

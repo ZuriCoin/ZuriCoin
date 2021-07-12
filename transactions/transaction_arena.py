@@ -45,10 +45,14 @@ class Transactions:
             transaction={}&\
             amount={}".format(self.private_key, self.senders_address, self.receivers_address, self.previous_hash, self.transaction_de_detols, self.amount )
         )
-        print(x.text)
-        outor = dict(x.json())
-        if(outor.get("status") == "true"):
-            print("Transaction initiation was Complete.")
+
+        out = x.text
+        print(out)
+        if out is not "":
+            outor = dict(x.json())
+            if(outor.get("status") == "true"):
+                print("Transaction initiation was Complete.")
+            #pass
         
 
         #this is where we would send the transaction to the ledger....

@@ -79,9 +79,9 @@ class Wallet:
             print(SHA256(self.private_key))
             print(self.access_token)
             print(response.text)
-            data = response.json()
+            data = dict(response.json())
             
-            if response.status_code == 200 and data["status"] == "true":
+            if response.status_code == 200 and data.get("status") == "true":
                 print('Saving wallet successful ')
                 today = str(datetime.today().isoformat())
                 with open('wallet.txt',  mode='a') as f:
